@@ -4,26 +4,32 @@ import React, {useState} from 'react';
 const Tags = () => {
   const [selected, setSelected] = useState('Trending Now');
   const tags = ['Trending Now', 'womens', 'Fashion', 'Mens', 'all'];
+  const tagsObject = [
+    {id: 1, name: 'Trending Now'},
+    {id: 2, name: 'Womens'},
+    {id: 3, name: 'Fashion'},
+    {id: 4, name: 'Mens'},
+    {id: 5, name: 'All'},
+  ];
   return (
     <View style={styles.container}>
       <FlatList
         horizontal
-        data={tags}
+        data={tagsObject}
+        keyExtractor={item => item.id.toString()} // Use id as key
         showsHorizontalScrollIndicator={false}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity onPress={() => setSelected(item)}>
-              <Text
-                style={[
-                  styles.tagText,
-                  item == selected ? styles.isSelected : null,
-                ]}>
-                {item}
-              </Text>
-            </TouchableOpacity>
-          );
-        }}
-        contentContainerStyle={styles.container}
+        renderItem={({item}) => (
+          <TouchableOpacity onPress={() => setSelected(item.name)}>
+            <Text
+              style={[
+                styles.tagText,
+                item.name === selected ? styles.isSelected : null,
+              ]}>
+              {item.name}
+            </Text>
+          </TouchableOpacity>
+        )}
+        contentContainerStyle={styles.contentContainer}
       />
     </View>
   );

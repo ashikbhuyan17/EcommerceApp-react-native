@@ -19,3 +19,10 @@ export const SettingsIcon = ({color, size}) => (
 export const CartIcon = ({color, size}) => (
   <AntDesign name="shoppingcart" size={size} color={color} />
 );
+
+export const HeartoIcon = ({color, size}) => (
+  <AntDesign name="hearto" size={20} color="#E55B5B" />
+);
+export const HeartIcon = ({color, size}) => (
+  <AntDesign name="heart" size={20} color="#E55B5B" />
+);

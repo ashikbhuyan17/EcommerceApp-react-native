@@ -1,4 +1,5 @@
 import {
+  FlatList,
   Image,
   StyleSheet,
   Text,
@@ -6,35 +7,95 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import Tags from '../components/Tags';
+import ProductCard from '../components/ProductCard';
 
 function HomeScreen({navigation}) {
   const onPress = () => {
     console.log('+++++++');
     navigation.navigate('Account');
   };
+  const [isLinked, setIsLinked] = useState(false);
   return (
+    // <LinearGradient colors={['#FDF0F3', '#FFFBFC']} style={styles.container}>
+    //   {/* <View style={styles.container}>
+    //     <TouchableOpacity style={styles.button} onPress={onPress}>
+    //       <Text>Go to Account page</Text>
+    //     </TouchableOpacity>
+    //   </View> */}
+    //   <Header />
+    //   <View>
+    //     <Text style={styles.headingText}>Match Your Style</Text>
+    //     <View style={styles.inputContainer}>
+    //       <Image
+    //         source={require('../assets/search.png')}
+    //         style={styles.searchIcon}
+    //       />
+    //       <TextInput placeholder="Search" style={styles.textInput} />
+    //     </View>
+    //   </View>
+    //   <Tags />
+    //   <FlatList
+    //     data={[1, 2, 3, 4, 5, 6]}
+    //     renderItem={ProductCard}
+    //     numColumns={2}
+    //   />
+    //   {/* <View
+    //     style={{
+    //       flexDirection: 'row',
+    //       gap: 10,
+    //     }}>
+    //     <ProductCard />
+    //     <ProductCard />
+    //   </View> */}
+    // </LinearGradient>
     <LinearGradient colors={['#FDF0F3', '#FFFBFC']} style={styles.container}>
-      {/* <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <Text>Go to Account page</Text>
-        </TouchableOpacity>
-      </View> */}
+      {/* header */}
+
+      {/* <Tags /> */}
       <Header />
-      <View>
-        <Text style={styles.headingText}>Match Your Style</Text>
-        <View style={styles.inputContainer}>
-          <Image
-            source={require('../assets/search.png')}
-            style={styles.searchIcon}
+
+      <FlatList
+        ListHeaderComponent={
+          <>
+            <>
+              <View>
+                <Text style={styles.headingText}>Match Your Style</Text>
+                <View style={styles.inputContainer}>
+                  <Image
+                    source={require('../assets/search.png')}
+                    style={styles.searchIcon}
+                  />
+                  <TextInput placeholder="Search" style={styles.textInput} />
+                </View>
+              </View>
+            </>
+            <Tags />
+          </>
+        }
+        data={[1, 2, 3, 4, 5, 6]}
+        numColumns={2}
+        renderItem={({item}) => (
+          <ProductCard
+            // item={item}
+            // handleProductClick={handleProductDetails}
+            // toggleFavorite={toggleFavorite}
+            isLinked={isLinked}
+            setIsLinked={setIsLinked}
           />
-          <TextInput placeholder="Search" style={styles.textInput} />
-        </View>
+        )}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingBottom: 50,
+        }}
+      />
+      <View>
+        {/* <Text>HomeScreen</Text>
+        <Text>HomeScreen</Text> */}
       </View>
-      <Tags />
     </LinearGradient>
   );
 }
@@ -43,7 +104,7 @@ export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     // justifyContent: 'center',
     // paddingHorizontal: 10,
     padding: 15,
@@ -51,7 +112,7 @@ const styles = StyleSheet.create({
   headingText: {
     fontSize: 28,
     color: '#000000',
-    marginVertical: 20,
+    marginVertical: 10,
     fontFamily: 'Poppins-Regular',
   },
   inputContainer: {
